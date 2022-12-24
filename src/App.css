@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Molu";
+    src: url("./assets/fonts/MainFont_Bold.ttf");
+}
+
+* {
+  font-family: 'Molu', serif;
+}
