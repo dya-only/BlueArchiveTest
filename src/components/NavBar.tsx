@@ -18,8 +18,8 @@ function NavBar() {
             <FontAwesomeIcon className='text-5xl text-white' icon={faArrowLeft} />
           </button>
 
-          <div className="title text-[#2c4663] tracking-tight text-4xl border-b-4 h-[45px] -ml-12 mt-3 pl-8 border-[#ffe03d]">학생 모집</div>
-          <button className="help text-white bg-[#2a4566] font-bold text-xl w-8 h-8 ml-2 mt-2 rounded-md transition duration-300 hover:opacity-70">?</button>
+          <div className="title text-[#2c4663] tracking-tight text-4xl border-b-4 h-[47px] -ml-12 mt-3 pl-8 border-[#ffe03d]">학생 모집</div>
+          <button className="help text-white bg-[#2a4566] font-bold text-xl w-8 h-8 ml-2 mt-1 rounded-md transition duration-300 hover:opacity-70">?</button>
         </div>
 
       </div>

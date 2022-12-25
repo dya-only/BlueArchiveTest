@@ -3,10 +3,23 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "Molu";
+    font-family: "Molu_Bold";
     src: url("./assets/fonts/MainFont_Bold.ttf");
 }
 
+@font-face {
+  font-family: "Molu";
+  src: url("./assets/fonts/MainFont.ttf");
+}
+
 * {
+  font-family: 'Molu_Bold', serif;
+}
+
+.font-molu {
   font-family: 'Molu', serif;
+}
+
+.font-molu-bold {
+  font-family: 'Molu_Bold', serif;
 }
