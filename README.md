@@ -1,4 +1,4 @@
 # BlueArchive
 Blue Archive Gacha Simulator (React.ts)
 
-![screenshot-rJEjY4](https://user-images.githubusercontent.com/51194584/209444932-144cdcf3-7212-415a-864d-3ddb360b2c75.png)
+![image](https://user-images.githubusercontent.com/51194584/209458289-ff2a73f9-cd8e-4cdc-95c5-9c0f664291bb.png)
