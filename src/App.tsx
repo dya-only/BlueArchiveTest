@@ -1,17 +1,18 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 
-import PickUp from './views/PickUp'
-import NavBar from './components/NavBar'
+import PickUp from './pages/PickUp'
+import Gacha from './pages/Gacha'
+// import NavBar from './components/NavBar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <Fragment>
-      <NavBar />
-      <PickUp />
-    </Fragment>
+    <Routes>
+      <Route path="/pickup" element={<PickUp />} />
+      <Route path="/d10" element={<Gacha />} />
+    </Routes>
   )
 }
 
