@@ -14,10 +14,12 @@ import SelectBtn from "../assets/select_student.png"
 
 import connected_sky from "./connected_sky.wav"
 import Atsuko_PV from "./atsuko_bg.mp4"
+import Act10 from "./act10.mp4"
 
 function PickUp() {
   const [isMusic, setIsMusic] = useState(false)
   const [isClick, setIsClick] = useState(false)
+  const [is10P, setIs10P] = useState(false)
 
   const onMusic = () => {
     setIsMusic(true)
@@ -27,12 +29,23 @@ function PickUp() {
     setIsClick(true)
   }
 
+  const onClick10P = () => {
+    // window.location.href="/gacha"
+    setIs10P(true)
+  }
+
   return (
     <div className="pick-up bg-cover font-molu-bold overflow-x-hidden">
 
       <NavBar />
 
       <img className='w-screen h-screen fixed -z-20' src={ Sub_bg } alt="" />
+
+      { is10P == true ?
+        <video className="w-screen overflow-none absolute z-30" autoPlay>
+          <source src={ Act10 } type="video/mp4" />
+        </video>
+        : null }
 
       { isMusic == true ? 
         <audio loop autoPlay>
@@ -45,16 +58,14 @@ function PickUp() {
       </video>
 
       {/* Music Button */}
-      <div className="flex justify-end">
-        { isMusic == false ? 
-          <div className="music_text text-[#24405d] text-xl fixed mr-[90px] mt-[90px]">음악이 나오지 않는다면?</div>
-          : null }
-        { isMusic == false ? 
-          <button className='music-btn transition duration-100 active:scale-90 fixed mr-8 mt-20 bg-white p-3 w-12 h-12 flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>
-            <FontAwesomeIcon className='font-awe-music text-3xl text-[#436299]' icon={faMusic} />
-          </button>
-          : null }
-      </div>
+      { isMusic == false ?
+        <div className="absolute w-full h-full backdrop-brightness-[0.2] flex items-center justify-center z-50">
+          <div className="flex flex-col justify-center items-center w-56 h-48 bg-white rounded-2xl">
+            <div className="font-molu text-xl mb-8">Made with React.ts</div>
+            <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>확인</button>
+          </div>
+        </div>
+      : null }
 
       {/* Pick Up Window */}
       <div className="flex justify-end items-center w-screen h-screen text-[#383f46]">
@@ -88,11 +99,11 @@ function PickUp() {
               </button>
 
               {/* 10회 */}
-              <Link to="/d10">
-                <button className='m-1 transition duration-100 active:scale-90'>
-                  <img className="w-[318px] " src={ Btn_10P } alt="" />
-                </button>
-              </Link>
+              <button className='m-1 transition duration-100 active:scale-90' onClick={ onClick10P }>
+                <img className="w-[318px] " src={ Btn_10P } alt="" />
+              </button>
+              {/* <Link to="/d10">
+              </Link> */}
             </div>
  
           </div>

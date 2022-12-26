@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route path="/pickup" element={<PickUp />} />
-      <Route path="/d10" element={<Gacha />} />
+      <Route path="/gacha" element={<Gacha />} />
     </Routes>
   )
 }
