@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faHouse, faGear } from '@fortawesome/free-solid-svg-icons'
 
@@ -7,6 +8,10 @@ import home from '../assets/home.png'
 
 function NavBar() {
 
+  // const onClickPrev = () => {
+  //   window.location.href="/"
+  // }
+
   return (
     <div className="navbar flex items-center justify-between tracking-tight fixed bg-[#f2fafd] shadow-lg rounded-b-4xl h-[60px] w-screen mb-12">
       
@@ -14,9 +19,11 @@ function NavBar() {
         <img className="h-[60px]" src={ nav } alt="" />
 
         <div className="first fixed flex items-center justify-center">
-          <button className="prev transition duration-100 active:scale-90 z-10 bg-[#456399] rounded-full w-[70px] h-[70px] m-10 mt-[85px] transition duration-300 hover:opacity-70">
-            <FontAwesomeIcon className='text-5xl text-white' icon={faArrowLeft} />
-          </button>
+          <Link className='z-10' to="/">
+            <button className="prev transition duration-100 active:scale-90 bg-[#456399] rounded-full w-[70px] h-[70px] m-10 mt-[85px] transition duration-300 hover:opacity-70">
+              <FontAwesomeIcon className='text-5xl text-white' icon={faArrowLeft} />
+            </button>
+          </Link>
 
           <div className="title text-[#2c4663] tracking-tight text-4xl border-b-4 h-[47px] -ml-12 mt-3 pl-8 border-[#ffe03d]">학생 모집</div>
           <button className="help transition duration-100 active:scale-90 text-white bg-[#2a4566] font-bold text-xl w-8 h-8 ml-2 mt-1 rounded-md transition duration-300 hover:opacity-70">?</button>

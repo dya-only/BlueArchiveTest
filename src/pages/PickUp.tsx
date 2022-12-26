@@ -17,14 +17,14 @@ import Atsuko_PV from "./atsuko_bg.mp4"
 import Act10 from "./act10.mp4"
 
 function PickUp() {
-  const [isMusic, setIsMusic] = useState(false)
+  // const [isMusic, setIsMusic] = useState(false)
   const [isClick, setIsClick] = useState(false)
   const [is10P, setIs10P] = useState(false)
   const [is1P, setIs1P] = useState(false)
 
-  const onMusic = () => {
-    setIsMusic(true)
-  }
+  // const onMusic = () => {
+  //   setIsMusic(true)
+  // }
 
   const onClick = () => {
     setIsClick(true)
@@ -33,11 +33,14 @@ function PickUp() {
   const onClick10P = () => {
     // window.location.href="/gacha"
     setIs10P(true)
+
+    setTimeout(()=>{ setIs10P(false) }, 18000);
   }
 
   const onClick1P = () => {
     // window.location.href="/gacha"
     setIs1P(true)
+
   }
 
   return (
@@ -54,25 +57,15 @@ function PickUp() {
         </video>
         : null }
 
-      { isMusic == true ? 
-        <audio loop autoPlay>
-          <source src={ connected_sky } type="audio/wav" />
-        </audio>
-       : null }
+      <audio loop autoPlay>
+        <source src={ connected_sky } type="audio/wav" />
+      </audio>
+      {/* { isMusic == true ? 
+       : null } */}
       
       <video className="w-screen absolute -z-20" muted autoPlay loop>
         <source src={ Atsuko_PV } type="video/mp4" />
       </video>
-
-      {/* Music Button */}
-      { isMusic == false ?
-        <div className="absolute w-full h-full backdrop-brightness-[0.2] flex items-center justify-center z-50 drop-shadow-2xl">
-          <div className="flex flex-col justify-center items-center w-[400px] h-48 bg-white rounded-2xl">
-            <div className="font-molu text-xl mb-8">사운드 재생을 위해 확인 버튼을 눌러주세요.</div>
-            <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>확인</button>
-          </div>
-        </div>
-      : null }
 
       {/* Pick Up Window */}
       { is10P == false ?
