@@ -20,6 +20,7 @@ function PickUp() {
   const [isMusic, setIsMusic] = useState(false)
   const [isClick, setIsClick] = useState(false)
   const [is10P, setIs10P] = useState(false)
+  const [is1P, setIs1P] = useState(false)
 
   const onMusic = () => {
     setIsMusic(true)
@@ -34,6 +35,11 @@ function PickUp() {
     setIs10P(true)
   }
 
+  const onClick1P = () => {
+    // window.location.href="/gacha"
+    setIs1P(true)
+  }
+
   return (
     <div className="pick-up bg-cover font-molu-bold overflow-x-hidden">
 
@@ -41,7 +47,7 @@ function PickUp() {
 
       <img className='w-screen h-screen fixed -z-20' src={ Sub_bg } alt="" />
 
-      { is10P == true ?
+      { is10P == true || is1P == true ?
         <video className="w-screen overflow-none absolute z-30" autoPlay>
           <source src={ Act10 } type="video/mp4" />
         </video>
@@ -94,7 +100,7 @@ function PickUp() {
             <div className="btns flex justify-center items-center mt-12">
 
               {/* 1회 */}
-              <button className='m-1 transition duration-100 active:scale-90'>
+              <button className='m-1 transition duration-100 active:scale-90' onClick={ onClick1P }>
                 <img className="w-[300px] h-[101px]" src={ Btn_1P } alt="" />
               </button>
 
