@@ -65,10 +65,10 @@ function PickUp() {
 
       {/* Music Button */}
       { isMusic == false ?
-        <div className="absolute w-full h-full backdrop-brightness-[0.2] flex items-center justify-center z-50">
-          <div className="flex flex-col justify-center items-center w-56 h-48 bg-white rounded-2xl">
-            <div className="font-molu text-xl mb-8">Made with React.ts</div>
-            <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>확인</button>
+        <div className="absolute w-full h-full backdrop-brightness-[0.2] flex items-center justify-center z-50 drop-shadow-2xl">
+          <div className="flex flex-col justify-center items-center w-[400px] h-48 bg-white rounded-2xl">
+            <div className="font-molu text-xl mb-8">사운드 재생을 위해 확인 버튼을 눌러주세요.</div>
+            <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>확인</button>
           </div>
         </div>
       : null }
