@@ -108,7 +108,7 @@ function Main() {
 
       <LobbyNavBar />
 
-      <div className="profile w-[320px] flex justify-center items-center mt-8">
+      <div className="profile w-[320px] flex justify-center items-center mt-8 mb-[35px]">
         <img className='w-[350px] absolute -z-10 ml-7' src={ ProfileBar } />
 
         <div className="profile-text flex items-center ml-[100px]">
@@ -126,6 +126,10 @@ function Main() {
             <div className="exp-text text-[#59eefb]">{ expProgress }/{ maxExp }</div>
           </div>
         </div>
+      </div>
+
+      <div className="use-menu flex justify-center items-center w-[140px]">
+        <img className='notice w-[50px] transition duration-100 active:scale-90 cursor-pointer' src={ Notice } />
       </div>
 
       <img className='w-screen h-screen fixed -z-20' src={ Sub_bg } alt="" />
