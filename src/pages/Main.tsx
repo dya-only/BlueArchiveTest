@@ -7,14 +7,15 @@ import LobbyNavBar from '../components/LobbyNavBar'
 
 import Sub_bg from "../assets/sub_bg.png"
 import ProfileBar from "../assets/profile_bar.png"
-import Test from "../assets/1096686.png"
+import Notice from "../assets/notice.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
+import Hoshino_Memorial from "./theme120_hoshino_mizugi.mp4"
 
 import LuminousMemory from "./luminous_memory.mp3"
 import MidSummerCat from "./midsummer_cat.mp3"
-
+import Theme120 from "./theme_120.mp3"
 
 function Main() {
   const [memorial, setMemorial] = useState("")
@@ -41,8 +42,9 @@ function Main() {
       setIsMusic(false)
     }
 
-    const Characters = ["Yuuka", "Azusa"]
-    let rand = Math.floor(Math.random() * 2)
+    const Characters = ["Yuuka", "Azusa", "Hoshino"]
+    // let rand = Math.floor(Math.random() * 2)
+    let rand = 2
 
     setMemorial(Characters[rand])
   }, [])
@@ -73,6 +75,12 @@ function Main() {
         </audio>
        : null }
 
+      { isMusic == true && memorial == "Hoshino" ?
+        <audio loop autoPlay>
+          <source src={ Theme120 } type="audio/mp3" />
+        </audio>
+       : null }
+
       {/* Memorial Acts */}
       { memorial == "Yuuka" ?
         <video className="object-none min-w-[2000px] overflow-auto fixed -ml-10 -mt-6 -z-10" muted autoPlay loop>
@@ -84,6 +92,13 @@ function Main() {
         <video className="w-screen overflow-none fixed m-0 -z-10" muted autoPlay loop>
           {/* w-screen overflow-none fixed m-0 -z-10 */}
           <source src={ Azusa_Memorial } type="video/mp4" />
+        </video>
+      : null }
+
+      { memorial == "Hoshino" ?
+        <video className="w-screen overflow-none fixed m-0 -z-10" muted autoPlay loop>
+          {/* w-screen overflow-none fixed m-0 -z-10 */}
+          <source src={ Hoshino_Memorial } type="video/mp4" />
         </video>
       : null }
 

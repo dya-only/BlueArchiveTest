@@ -44,7 +44,6 @@ function NavBar() {
 
       </div>
 
-
       <div className="menu flex justify-center items-center">
         <img className='absolute shadow-xl rounded-sm w-[240px] h-[45px] -z-10' src={ menubar } />
 
