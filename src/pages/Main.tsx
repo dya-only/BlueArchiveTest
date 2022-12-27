@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // import NavBar from '../components/NavBar'
+import LobbyNavBar from '../components/LobbyNavBar'
 
 import Sub_bg from "../assets/sub_bg.png"
 import ProfileBar from "../assets/profile_bar.png"
@@ -88,6 +88,8 @@ function Main() {
       {/* <Link to="/pickup">
         <button className='btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 m-4 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg'>모집</button>
       </Link> */}
+
+      <LobbyNavBar />
 
       <div className="profile w-[320px] flex justify-center items-center mt-8">
         <img className='w-[350px] absolute -z-10 ml-7' src={ ProfileBar } />
