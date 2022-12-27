@@ -7,6 +7,7 @@ import LobbyNavBar from '../components/LobbyNavBar'
 
 import Sub_bg from "../assets/sub_bg.png"
 import ProfileBar from "../assets/profile_bar.png"
+import Test from "../assets/1096686.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
@@ -53,7 +54,7 @@ function Main() {
       { JSON.parse(isMusic.toString()) == false ?
         <div className="absolute w-full h-full backdrop-brightness-[0.2] flex items-center justify-center z-50 drop-shadow-2xl">
           <div className="flex flex-col justify-center items-center w-[400px] h-48 bg-white rounded-2xl">
-            <div className="font-molu text-xl mb-8">사운드 재생을 위해 확인 버튼을 눌러주세요.</div>
+            <div className="font-molu text-xl mb-8">사운드 재생을 위해 확인 버튼을 눌러주세요.<br/>※전체화면을 사용해주세요.</div>
             <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onMusic}>확인</button>
           </div>
         </div>
@@ -74,13 +75,14 @@ function Main() {
 
       {/* Memorial Acts */}
       { memorial == "Yuuka" ?
-        <video className="w-screen overflow-none fixed -z-10" muted autoPlay loop>
+        <video className="object-none min-w-[2000px] overflow-auto fixed -ml-10 -mt-6 -z-10" muted autoPlay loop>
           <source src={ Yuuka_Memorial } type="video/mp4" />
         </video>
       : null }
 
       { memorial == "Azusa" ?
-        <video className="w-screen overflow-none fixed -z-10" muted autoPlay loop>
+        <video className="w-screen overflow-none fixed m-0 -z-10" muted autoPlay loop>
+          {/* w-screen overflow-none fixed m-0 -z-10 */}
           <source src={ Azusa_Memorial } type="video/mp4" />
         </video>
       : null }

@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @font-face {
     font-family: "Molu_Bold";
     src: url("./assets/fonts/MainFont_Bold.ttf");
@@ -23,3 +19,12 @@
 .font-molu-bold {
   font-family: 'Molu_Bold', serif;
 }
+
+.vid {
+  display: block;
+  margin: 0 auto;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
