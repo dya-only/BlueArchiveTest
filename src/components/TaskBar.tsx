@@ -14,9 +14,29 @@ import Store from "../assets/store.png"
 import Gacha from "../assets/gacha.png"
 
 function TaskBar() {
+  const [time, setTime] = useState("00:00")
+
+  const currentTime = () => {
+    const date = new Date()
+    let h = date.getHours() < 12 ? "am" : "pm";
+    let hours = String(date.getHours())
+    const minutes = String(date.getMinutes())
+
+    if (date.getHours() > 12) { hours = String(date.getHours() - 12) }
+
+    if (h == "am") { setTime(`AM ${hours}:${minutes}`) }
+    else { setTime(`PM ${hours}:${minutes}`) }
+
+  }
+
+  const startTime = () => {
+    setInterval(currentTime, 1000)
+  }
+
+  startTime()
 
   return (
-    <div className="task-bar fixed w-screen h-screen flex  items-end justify-center">
+    <div className="task-bar fixed w-screen h-screen flex  items-end justify-center -z-10">
 
       <img className='absolute mb-4 w-[96%] shadow-lg' src={ TaskBarBG } />
 
@@ -29,7 +49,9 @@ function TaskBar() {
         <img className='w-15 mt-3 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Circle }></img>
         <img className='w-13 mt-4 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Build }></img>
         <img className='w-15 mt-5 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Store }></img>
-        <img className='w-15 mr-[70px] transition duration-100 active:scale-90 cursor-pointer' src={ Gacha }></img>
+        <Link to="/pickup">
+          <img className='w-15 mr-[70px] transition duration-100 active:scale-90 cursor-pointer' src={ Gacha }></img>
+        </Link>
       </div>
 
       <div className="buttons-text z-10 absolute w-screen flex justify-start items-center mb-[0.3%]">
@@ -39,9 +61,10 @@ function TaskBar() {
         <div className="text-2xl font-molu text-[#16365c] mr-[114px]">학생</div>
         <div className="text-2xl font-molu text-[#16365c] mr-[114px]">편성</div>
         <div className="text-2xl font-molu text-[#16365c] mr-[112px]">서클</div>
-        <div className="text-2xl font-molu text-[#16365c] mr-[112px]">제조</div>
-        <div className="text-2xl font-molu text-[#16365c] mr-[125px]">상점</div>
-        <div className="text-2xl font-molu text-[#16365c]">모집</div>
+        <div className="text-2xl font-molu text-[#16365c] mr-[114px]">제조</div>
+        <div className="text-2xl font-molu text-[#16365c] mr-[123px]">상점</div>
+        <div className="text-2xl font-molu text-[#16365c] mr-[485px]">모집</div>
+        <div className="text-xl font-molu text-[#16365c] mt-3">{ time }</div>
       </div>
 
     </div>

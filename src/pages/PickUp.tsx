@@ -70,7 +70,7 @@ function PickUp() {
       {/* Pick Up Window */}
       { is10P == false ?
         <div className="flex justify-end items-center w-screen h-screen text-[#383f46]">
-          <div className="window-bg fixed z-20 w-[680px] h-[580px] bg-[#a9e0f5] rounded-md shadow-md mr-8 mt-[50px]">
+          <div className="window-bg fixed z-20 w-[680px] h-[580px] bg-[#a9e0f5] rounded-md shadow-md mr-36 mt-[50px]">
             <div className="pt-3 pb-3 flex justify-center items-center w-[170px] m-[8px] bg-[#f1fbfc] rounded-t-md font-molu text-[23px]">픽업 모집</div>
             
             <div className="info w-[680px] h-[445px] -mt-[12px] bg-[#f1fbfc]">

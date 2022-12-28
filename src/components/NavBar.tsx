@@ -41,9 +41,11 @@ function NavBar() {
 
         <div className="sub-line bg-neutral-300 w-[2px] h-[26px] rotate-[12deg] mr-5"></div>
 
-        <button className="home-btn mt-1 mr-8">
-          <FontAwesomeIcon className='text-4xl text-[#436299] transition duration-100 active:scale-90' icon={faHouse} />
-        </button>
+        <Link to="/">
+          <button className="home-btn mt-1 mr-8">
+            <FontAwesomeIcon className='text-4xl text-[#436299] transition duration-100 active:scale-90' icon={faHouse} />
+          </button>
+        </Link>
 
       </div>      
       
