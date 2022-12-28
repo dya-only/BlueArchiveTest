@@ -14,6 +14,10 @@ import plus from '../assets/plus.png'
 
 function NavBar() {
 
+  const onClickMemorial = () => {
+    sessionStorage.setItem("isSelectingMemorial", "true")
+  }
+
   // const onClickPrev = () => {
   //   window.location.href="/"
   // }
@@ -48,7 +52,7 @@ function NavBar() {
         <img className='absolute shadow-xl rounded-sm w-[240px] h-[45px] -z-10' src={ menubar } />
 
         <div className="flex items-center justify-center cursor-pointer">
-          <img className='w-[33px] transition duration-100 active:scale-90' src={ profileBtn } />
+          <img className='w-[33px] transition duration-100 active:scale-90' src={ profileBtn } onClick={ onClickMemorial } />
 
           <div className="sub-line bg-neutral-400 w-[1px] h-[21px] rotate-[12deg] mr-5 ml-5 rounded-2xl"></div>
 

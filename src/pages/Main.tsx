@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark, faEnvelope,  } from '@fortawesome/free-solid-svg-icons'
 
 // import NavBar from '../components/NavBar'
 import LobbyNavBar from '../components/LobbyNavBar'
@@ -12,6 +14,17 @@ import Notice from "../assets/notice.png"
 import MomoTalk from "../assets/momo.png"
 import Quest from "../assets/quest.png"
 import PyroxeneStore from "../assets/buy_blue.png"
+import home from '../assets/home.png'
+import menubar from '../assets/menu_bar.png'
+import profileBtn from '../assets/memorial_btn.png'
+import settBtn from '../assets/sett_btn.png'
+import BlueItemMenu from '../assets/blue_item_menu.png'
+import CoinItemMenu from '../assets/coin_item_menu.png'
+import ApItemMenu from '../assets/ap_item_menu.png'
+import plus from '../assets/plus.png'
+import yuuka_gym from "../assets/yuuka_gym.png"
+import azusa_mizugi from "../assets/azusa_mizugi.png"
+import hoshino_mizugi from "../assets/hoshino_mizugi.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
@@ -24,15 +37,30 @@ import Theme120 from "./theme_120.mp3"
 function Main() {
   const [memorial, setMemorial] = useState("")
   const [isMusic, setIsMusic] = useState(false)
+  const [isSelectingMemorial, setIsSelectingMemorial] = useState(false)
   const [expProgress, setExpProgress] = useState(0)
   const [maxExp, setMaxExp] = useState(0)
   
+  const Characters = ["Yuuka", "Azusa", "Hoshino"]
+
   const StyledProgressBar = styled.div` width: ${ Math.floor(expProgress / maxExp * 100) }%; height: 5px; background-color: #59eefb`
   // exp-progress bg-[#59eefb] h-[5px] w-[60%]
 
   const onMusic = () => {
     setIsMusic(true)
     sessionStorage.setItem("isPlaying", "true")
+  }
+
+  const onClickQuit = () => {
+    setIsSelectingMemorial(false)
+  }
+
+  const onClickMemorial = () => {
+    setIsSelectingMemorial(true)
+  }
+
+  const SelectMemorial = (name: String) => {
+    setMemorial(String(name))
   }
   
   useEffect(() => {
@@ -46,12 +74,19 @@ function Main() {
       setIsMusic(false)
     }
 
-    const Characters = ["Yuuka", "Azusa", "Hoshino"]
     // let rand = Math.floor(Math.random() * 2)
     let rand = 2
 
     setMemorial(Characters[rand])
   }, [])
+
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("isSelectingMemorial") == "true") {
+  //     setIsMusic(true)
+  //   } else {
+  //     setIsMusic(false)
+  //   }
+  // })
   
   return (
     <div className="main bg-cover font-molu-bold overflow-x-hidden">
@@ -65,6 +100,42 @@ function Main() {
           </div>
         </div>
        : null }
+
+      {/* Select Memorial  */}
+      { isSelectingMemorial == true ?
+        <div className="fixed w-full h-full backdrop-brightness-[0.8] flex items-center justify-center z-50 drop-shadow-2xl">
+          <div className=" flex flex-col justify-center w-[650px] h-[400px] bg-white rounded-2xl">
+            <button className="quit z-20 -mt-[349px] fixed w-[600px] flex justify-end ml-9 transition duration-100 active:scale-[99%] cursor-pointer" onClick={ onClickQuit }>
+              <FontAwesomeIcon className='text-5xl text-[#2c4663]' icon={faXmark} />
+            </button>
+            <div className="fixed title flex pt-[30px] justify-center flex-col -mt-[370px]">
+              <div className='flex justify-center'>
+                <div className="font-molu-bold text-3xl text-[#2c4663] w-[115px] border-b-[4px] border-[#ffe03d]">당번 선택</div>
+                  <button className="help transition duration-100 active:scale-90 text-white bg-[#2a4566] font-bold text-xl w-8 h-8 ml-2 rounded-md transition duration-300 hover:opacity-70">?</button>
+                </div>
+              <div className="border-b-[2px] border-gray-300 w-[650px]"></div>
+            </div>
+            <div className="cards flex justify-start items-start w-[650px] h-[250px]">
+              <button className='m-4' onClick={ () => SelectMemorial("Yuuka") }>
+                <img className='w-[150px] transition duration-100 active:scale-95 hover:scale-105' src={ yuuka_gym } />
+                <div className='text-xl text-[#2c4663]'>유우카 (체육복)</div>
+              </button>
+              <button className='m-4' onClick={ () => SelectMemorial("Azusa") }>
+                <img className='w-[150px] transition duration-100 active:scale-95 hover:scale-105' src={ azusa_mizugi } />
+                <div className='text-xl text-[#2c4663]'>아즈사 (수영복)</div>
+              </button>
+              <button className='m-4' onClick={ () => SelectMemorial("Hoshino") }>
+                <img className='w-[150px] transition duration-100 active:scale-95 hover:scale-105' src={ hoshino_mizugi } />
+                <div className='text-xl text-[#2c4663]'>호시노 (수영복)</div>
+              </button>
+            </div>
+            <div className="flex justify-center">
+              <button className='music-btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg' onClick={onClickQuit}>확인</button>
+            </div>  
+          </div>
+        </div>
+       : null }
+      
 
       {/* Memorial Musics */}
       { isMusic == true && memorial == "Yuuka" ?
@@ -110,7 +181,49 @@ function Main() {
         <button className='btn bg-[#456399] font-molu transition duration-100 active:scale-90 text-white p-3 m-4 w-[80px] drop-shadow-2xl flex justify-center items-center drop-shadow-xl rounded-lg'>모집</button>
       </Link> */}
 
-      <LobbyNavBar />
+      {/* <LobbyNavBar /> */}
+      <div className="lobby-navbar flex items-center justify-end fixed pr-[58px] mt-8 w-screen">
+
+        <div className="items flex justify-center items-center mr-[50px]">
+
+          <div className="item-menu flex justify-start items-center w-[200px] mr-2">
+            <img className='absolute shadow-xl rounded-sm w-[200px] -z-10 opacity-[85%]' src={ ApItemMenu } />
+            <div className="font-molu-bold text-[#16365c] text-[24px] mt-1 pl-[47px] tracking-tight flex justify-center">60/148</div>
+          </div>
+
+          <img className='w-6 h-6 fixed mr-[275px] cursor-pointer transition duration-100 active:scale-90' src={ plus } />
+
+          <div className="item-menu flex justify-start items-center w-[200px] mr-2">
+            <img className='absolute shadow-xl rounded-sm w-[200px] -z-10 opacity-[85%]' src={ CoinItemMenu } />
+            <div className="font-molu-bold text-[#16365c] text-[24px] mt-1 pl-[55px] tracking-tight flex justify-center">4504918</div>
+          </div>
+
+          <div className="item-menu flex justify-start items-center w-[200px]">
+            <img className='absolute shadow-xl rounded-sm w-[200px] -z-10 opacity-[85%]' src={ BlueItemMenu } />
+            <div className="font-molu-bold text-[#16365c] text-[24px] mt-1 pl-[45px] tracking-tight flex justify-center">12402</div>
+          </div>
+
+          <img className='w-6 h-6 fixed ml-[555px] cursor-pointer transition duration-100 active:scale-90' src={ plus } />
+
+        </div>
+
+        <div className="menu flex justify-center items-center">
+          <img className='absolute shadow-xl rounded-sm w-[240px] h-[45px] -z-10' src={ menubar } />
+
+          <div className="flex items-center justify-center cursor-pointer">
+            <img className='w-[33px] transition duration-100 active:scale-90' src={ profileBtn } onClick={ onClickMemorial } />
+
+            <div className="sub-line bg-neutral-400 w-[1px] h-[21px] rotate-[12deg] mr-5 ml-5 rounded-2xl"></div>
+
+            <FontAwesomeIcon className='text-[27px] text-[#426199] transition duration-100 active:scale-90 cursor-pointer' icon={ faEnvelope } />
+
+            <div className="sub-line bg-neutral-400 w-[1px] h-[21px] rotate-[12deg] mr-5 ml-5 rounded-2xl"></div>
+
+            <img className='w-[24px] transition duration-100 active:scale-90 cursor-pointer' src={ settBtn } />
+          </div>
+        </div>
+      </div>
+
       <TaskBar />
 
       <div className="profile w-[320px] flex justify-center items-center mt-8 mb-[35px]">

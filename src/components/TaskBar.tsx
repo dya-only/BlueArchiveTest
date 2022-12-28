@@ -12,6 +12,7 @@ import Circle from "../assets/circle.png"
 import Build from "../assets/build.png"
 import Store from "../assets/store.png"
 import Gacha from "../assets/gacha.png"
+import Task from "../assets/task_btn.png"
 
 function TaskBar() {
   const [time, setTime] = useState("00:00")
@@ -63,8 +64,15 @@ function TaskBar() {
         <div className="text-2xl font-molu text-[#16365c] mr-[112px]">서클</div>
         <div className="text-2xl font-molu text-[#16365c] mr-[114px]">제조</div>
         <div className="text-2xl font-molu text-[#16365c] mr-[123px]">상점</div>
-        <div className="text-2xl font-molu text-[#16365c] mr-[485px]">모집</div>
+        <div className="text-2xl font-molu text-[#16365c]">모집</div>
+      </div>
+      
+      <div className="absolute w-screen flex justify-end items-center mb-[1.2%] mr-[175px]">
         <div className="text-xl font-molu text-[#16365c] mt-3">{ time }</div>
+      </div>
+
+      <div className="task mb-32">
+        <img className='shadow-lg w-[250px] transition duration-100 active:scale-90 cursor-pointer' src={ Task } />
       </div>
 
     </div>
