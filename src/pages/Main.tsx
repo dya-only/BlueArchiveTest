@@ -4,10 +4,14 @@ import styled from 'styled-components'
 
 // import NavBar from '../components/NavBar'
 import LobbyNavBar from '../components/LobbyNavBar'
+import TaskBar from '../components/TaskBar'
 
 import Sub_bg from "../assets/sub_bg.png"
 import ProfileBar from "../assets/profile_bar.png"
 import Notice from "../assets/notice.png"
+import MomoTalk from "../assets/momo.png"
+import Quest from "../assets/quest.png"
+import PyroxeneStore from "../assets/buy_blue.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
@@ -107,6 +111,7 @@ function Main() {
       </Link> */}
 
       <LobbyNavBar />
+      <TaskBar />
 
       <div className="profile w-[320px] flex justify-center items-center mt-8 mb-[35px]">
         <img className='w-[350px] absolute -z-10 ml-7' src={ ProfileBar } />
@@ -128,8 +133,25 @@ function Main() {
         </div>
       </div>
 
-      <div className="use-menu flex justify-center items-center w-[140px]">
-        <img className='notice w-[50px] transition duration-100 active:scale-90 cursor-pointer' src={ Notice } />
+      <div className="use-menu flex flex-col justify-center items-center w-[200px]">
+        <div className="flex w-[140px] justify-center ml-[85px]">
+          <img className='notice w-[70px] h-[70px] transition duration-100 active:scale-90 cursor-pointer m-4 mr-10' src={ Notice } />
+          <img className='momo-talk w-[63px] transition duration-100 active:scale-90 cursor-pointer m-4' src={ MomoTalk } />
+        </div>
+        <div className="flex w-[140px] justify-center ml-[85px]">
+          <img className='notice w-[70px] h-[70px] transition duration-100 active:scale-90 cursor-pointer m-4 mr-10' src={ Quest } />
+          <img className='momo-talk w-[70px] transition duration-100 active:scale-90 cursor-pointer m-4' src={ PyroxeneStore } />
+        </div>
+
+        <div className="absolute flex justify-center ml-[120px] -mt-5">
+          <div className='notice w-[60px] text-[#16365c] text-[23px] m-4 mr-[45px]'>공지</div>
+          <div className='momo-talk w-[70px]  text-[#16365c] text-[23px] m-4'>모모톡</div>
+        </div>
+
+        <div className="absolute flex justify-center ml-[110px] mt-[195px]">
+          <div className='notice w-[60px] text-[#16365c] text-[23px] m-4 mr-[18px]'>미션</div>
+          <div className='momo-talk w-[100px] text-[#16365c] text-[23px] m-4'>청휘석구매</div>
+        </div>
       </div>
 
       <img className='w-screen h-screen fixed -z-20' src={ Sub_bg } alt="" />
