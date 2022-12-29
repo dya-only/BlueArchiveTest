@@ -45,7 +45,9 @@ function TaskBar() {
         <img className='w-16 mr-[60px] invisible' src={ Cafe }></img>
         <img className='w-16 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Cafe }></img>
         <img className='w-12 mt-2 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Schedule }></img>
-        <img className='w-13 mt-3 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Students }></img>
+        <Link to="/students">
+          <img className='w-13 mt-3 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Students }></img>
+        </Link>
         <img className='w-15 mt-4 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Set }></img>
         <img className='w-15 mt-3 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Circle }></img>
         <img className='w-13 mt-4 mr-[100px] transition duration-100 active:scale-90 cursor-pointer' src={ Build }></img>

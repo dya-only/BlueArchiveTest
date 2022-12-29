@@ -4,7 +4,7 @@ import './App.css'
 
 import PickUp from './pages/PickUp'
 import Main from './pages/Main'
-// import NavBar from './components/NavBar'
+import Students from './pages/Students'
 
 function App() {
 
@@ -12,6 +12,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Main />} />
       <Route path="/pickup" element={<PickUp />} />
+      <Route path="/students" element={<Students />} />
     </Routes>
   )
 }
