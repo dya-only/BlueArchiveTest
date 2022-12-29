@@ -25,6 +25,11 @@ import plus from '../assets/plus.png'
 import yuuka_gym from "../assets/yuuka_gym.png"
 import azusa_mizugi from "../assets/azusa_mizugi.png"
 import hoshino_mizugi from "../assets/hoshino_mizugi.png"
+import momo_logo from "../assets/momo_logo.png"
+import talk_logo from "../assets/talk_logo.png"
+import momo_latest_btn from "../assets/momo_latest_btn.png"
+import momo_down_btn from "../assets/momo_down_btn.png"
+import yuuka_profile from "../assets/yuuka_profile.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
@@ -38,13 +43,16 @@ function Main() {
   const [memorial, setMemorial] = useState("")
   const [isMusic, setIsMusic] = useState(false)
   const [isSelectingMemorial, setIsSelectingMemorial] = useState(false)
+  const [isMomoTalk, setIsMomoTalk] = useState(false)
+  const [whoChat, setWhoChat] = useState("")
   const [expProgress, setExpProgress] = useState(0)
   const [maxExp, setMaxExp] = useState(0)
   
   const Characters = ["Yuuka", "Azusa", "Hoshino"]
 
+  const Yuuka_Chats = ["안녕하세요, 선생님. 유우카입니다.", "저 기억하고 계시죠?", "*아아. 당연하지.", "뭐, 그럼 다행이구요.", "선생님의 연락처를 받아두길 잘했네요.", "모모톡으로 연락드린 건 다름이 아니라······.", "지난번 샬레 탈환 당시 사용했던 탄환의 경비 처리가 늦어지고 있어서요."]
+
   const StyledProgressBar = styled.div` width: ${ Math.floor(expProgress / maxExp * 100) }%; height: 5px; background-color: #59eefb`
-  // exp-progress bg-[#59eefb] h-[5px] w-[60%]
 
   const onMusic = () => {
     setIsMusic(true)
@@ -61,6 +69,18 @@ function Main() {
 
   const SelectMemorial = (name: String) => {
     setMemorial(String(name))
+  }
+
+  const SelectChat = (name: String) => {
+    setWhoChat(String(name))
+  }
+
+  const onClickQuitMomo = () => {
+    setIsMomoTalk(false)
+  }
+
+  const onClickMomo = () => {
+    setIsMomoTalk(true)
   }
   
   useEffect(() => {
@@ -135,7 +155,73 @@ function Main() {
           </div>
         </div>
        : null }
-      
+
+      {/* MoMo Talk */}
+      { isMomoTalk ?
+      <div className="fixed w-full h-full backdrop-brightness-[0.8] flex items-center justify-center z-50 drop-shadow-2xl">
+        <div className="flex flex-col justify-center items-center">
+          <div className="window-title w-[1100px] h-[60px] bg-[#fa91a5] rounded-t-xl flex justify-between items-center">
+            <div className='flex justify-center items-center'>
+              <img className='w-13 ml-1' src={ momo_logo } />
+              <div className="title text-white text-3xl font-molu-bold mt-1">MomoTalk</div>
+            </div>
+            <button className="quit mr-4 transition duration-100 active:scale-[99%] cursor-pointer" onClick={ onClickQuitMomo }>
+              <FontAwesomeIcon className='text-5xl text-white' icon={faXmark} />
+            </button>
+          </div>
+          <div className=" flex justify-start w-[1100px] h-[550px] bg-white rounded-b-xl">
+            
+            <div className="left-bar bg-[#4c5b70] w-[110px] h-[550px] [990px] rounded-bl-xl">
+              <div className="square w-[110px] h-[105px] bg-[#647789] flex justify-center items-center">
+                <img className='w-[55px]' src={ talk_logo } />
+              </div>
+            </div>
+
+            <div className="chat-list w-[500px] h-[550px] bg-[#f3f7f8]">
+              <div className="top-bar w-[500px] h-[70px] flex items-center justify-around ml-1">
+                <div className="text text-2xl font-molu-bold text-[#373a3d]">안 읽은 메시지(0)</div>
+                <img className='h-[70px] mt-5 transition duration-100 active:scale-90 cursor-pointer' src={ momo_latest_btn } />
+                <img className='h-[70px] -ml-10 mt-5 transition duration-100 active:scale-90 cursor-pointer' src={ momo_down_btn } />
+              </div>
+              <div className="line-contain w-[500px] flex justify-center">
+                <div className="line w-[460px] h-[1.5px] bg-zinc-300"></div>
+              </div>
+              <div className="chats mt-2">
+                <div className="chat-one w-[500px] h-[85px] hover:bg-[#dce5ec] flex justify-start items-center">
+                  <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
+                  <div className="name-last ml-4 mt-[2px]">
+                    <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
+                    <div className="last font-molu-bold text-[22px] text-[#898c94] w-[350px] truncate">{ Yuuka_Chats[Yuuka_Chats.length-1] }</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="chat-real w-[490px] h-[534px] rounded-br-xl bg-white pt-4 overflow-y-auto overflow-x-hidden">
+
+              <div className="w-[500px] h-[85px] hover:bg-[#dce5ec] flex justify-start items-center">
+                <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
+                <div className="name-last ml-4 mt-[2px]">
+                  <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
+                </div>
+              </div>
+
+              { Yuuka_Chats.map((i) => {
+                if (i.split('')[0] == "*") {
+                  return ( <div className='flex justify-end'>
+                    <div className='one-chat p-2 m-2 max-w-[450px] bg-[#498bc7] rounded-xl text-white text-xl'>{ i.substring(1) }</div>
+                  </div> )
+                } else {
+                  return( <div className='flex justify-start'>
+                  <div className='one-chat p-2 m-2 max-w-[450px] bg-[#4c586d] rounded-xl text-white text-xl'>{ i }</div>
+                  </div> )
+                }
+              }) }
+            </div>
+
+          </div>
+        </div>
+      </div>
+      : null }
 
       {/* Memorial Musics */}
       { isMusic == true && memorial == "Yuuka" ?
@@ -249,10 +335,12 @@ function Main() {
       <div className="use-menu flex flex-col justify-center items-center w-[200px]">
         <div className="flex w-[140px] justify-center ml-[85px]">
           <img className='notice w-[70px] h-[70px] transition duration-100 active:scale-90 cursor-pointer m-4 mr-10' src={ Notice } />
-          <img className='momo-talk w-[63px] transition duration-100 active:scale-90 cursor-pointer m-4' src={ MomoTalk } />
+          <button className='mr-[80px] mb-[115px]' onClick={ onClickMomo }>
+            <img className='momo-talk w-[63px] absolute transition duration-100 active:scale-90 cursor-pointer m-4' src={ MomoTalk } />
+          </button>
         </div>
         <div className="flex w-[140px] justify-center ml-[85px]">
-          <img className='notice w-[70px] h-[70px] transition duration-100 active:scale-90 cursor-pointer m-4 mr-10' src={ Quest } />
+          <img className='notice w-[67px] h-[67px] transition duration-100 active:scale-90 cursor-pointer m-4 mr-[45px]' src={ Quest } />
           <img className='momo-talk w-[70px] transition duration-100 active:scale-90 cursor-pointer m-4' src={ PyroxeneStore } />
         </div>
 
