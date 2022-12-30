@@ -60,8 +60,6 @@ function PickUp() {
       <audio loop autoPlay>
         <source src={ connected_sky } type="audio/wav" />
       </audio>
-      {/* { isMusic == true ? 
-       : null } */}
       
       <video className="w-screen absolute -z-20" muted autoPlay loop>
         <source src={ Atsuko_PV } type="video/mp4" />

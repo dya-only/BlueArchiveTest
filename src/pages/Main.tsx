@@ -29,11 +29,13 @@ import momo_logo from "../assets/momo_logo.png"
 import talk_logo from "../assets/talk_logo.png"
 import momo_latest_btn from "../assets/momo_latest_btn.png"
 import momo_down_btn from "../assets/momo_down_btn.png"
+import yuuka_story_btn from "../assets/yuuka_story_btn.png"
 import yuuka_profile from "../assets/yuuka_profile.png"
 
 import Yuuka_Memorial from "./midsummer_cat_yuuka_gym.mp4"
 import Azusa_Memorial from "./luminous_memory_azusa_mizugi.mp4"
 import Hoshino_Memorial from "./theme120_hoshino_mizugi.mp4"
+import YuukaStory1 from "./YuukaStory1.mp4"
 
 import LuminousMemory from "./luminous_memory.mp3"
 import MidSummerCat from "./midsummer_cat.mp3"
@@ -47,10 +49,11 @@ function Main() {
   const [maxExp, setMaxExp] = useState(0)
   const [isMomoTalk, setIsMomoTalk] = useState(false)
   const [whoChat, setWhoChat] = useState("")
+  const [isYuukaStory, setIsYuukaStory] = useState(false)
   
   const Characters = ["Yuuka", "Azusa", "Hoshino"]
 
-  const Yuuka_Chats = ["안녕하세요, 선생님. 유우카입니다.", "저 기억하고 계시죠?", "*아아. 당연하지.", "뭐, 그럼 다행이구요.", "선생님의 연락처를 받아두길 잘했네요.", "모모톡으로 연락드린 건 다름이 아니라······.", "지난번 샬레 탈환 당시 사용했던 탄환의 경비 처리가 늦어지고 있어서요.", "경비는 언제쯤 청구받을 수 있을까요?", "*이쪽에서 처리해야 하는 거였어······?", "물론이죠. 탄환도 공짜는 아니니까요.", "청구서를 작성해서 보내주시면 총학생회에서", "대신 잔금을 치러줄 거에요.", "청구서 양식이라면 밀레니엄 학원에서 쓰는 것이 있어요.", "다음에 샬레를 방문할 때 가져다드릴게요.", "*도와줘서 고마워.", "어려운 일도 아닌걸요.", "그럼 좋은 하루 되세요."]
+  const Yuuka_Chats = ["안녕하세요, 선생님. 유우카입니다.", "저 기억하고 계시죠?", "*아아. 당연하지.", "뭐, 그럼 다행이구요.", "선생님의 연락처를 받아두길 잘했네요.", "모모톡으로 연락드린 건 다름이 아니라······.", "지난번 샬레 탈환 당시 사용했던 탄환의 경비 처리가 늦어지고 있어서요.", "경비는 언제쯤 청구받을 수 있을까요?", "*이쪽에서 처리해야 하는 거였어······?", "물론이죠. 탄환도 공짜는 아니니까요.", "청구서를 작성해서 보내주시면 총학생회에서", "대신 잔금을 치러줄 거에요.", "청구서 양식이라면 밀레니엄 학원에서 쓰는 것이 있어요.", "다음에 샬레를 방문할 때 가져다드릴게요.", "*도와줘서 고마워.", "어려운 일도 아닌걸요.", "그럼 좋은 하루 되세요.", "&"]
 
   const StyledProgressBar = styled.div` width: ${ Math.floor(expProgress / maxExp * 100) }%; height: 5px; background-color: #59eefb`
 
@@ -83,6 +86,12 @@ function Main() {
   const onClickMomo = () => {
     setIsMomoTalk(true)
   }
+
+  const onYuukaStory = () => {
+    onClickQuitMomo()
+    setIsYuukaStory(true)
+    setTimeout(()=>{ setIsYuukaStory(false); localStorage.setItem("YuukaStoryProgress", String(parseInt(JSON.parse(localStorage.getItem("YuukaStoryProgress") || '{}')) + 1)) }, 225000);
+  }
   
   useEffect(() => {
 
@@ -96,9 +105,11 @@ function Main() {
     }
 
     // let rand = Math.floor(Math.random() * 2)
-    let rand = 2
+    let rand = 0
 
-    setMemorial(Characters[rand])    
+    setMemorial(Characters[rand])
+
+    if (localStorage.getItem("YuukaStoryProgress") == null) localStorage.setItem("YuukaStoryProgress", "0")
   }, [])
   
   return (
@@ -149,6 +160,13 @@ function Main() {
         </div>
        : null }
 
+      {/* Yuuka Story Act 1 */}
+      { isYuukaStory == true ?
+        <video className="w-screen absolute z-30" autoPlay>
+          <source src={ YuukaStory1 } type="video/mp4" />
+        </video>
+       : null }
+
       {/* MoMo Talk */}
       { isMomoTalk ?
       <div className="fixed w-full h-full backdrop-brightness-[0.8] flex items-center justify-center z-50 drop-shadow-2xl">
@@ -185,7 +203,7 @@ function Main() {
                   <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
                   <div className="name-last ml-4 mt-[2px] flex flex-col items-start">
                     <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
-                    <div className="last font-molu-bold text-[22px] text-[#898c94] w-[350px] truncate flex">{ Yuuka_Chats[Yuuka_Chats.length-1] }</div>
+                    <div className="last font-molu-bold text-[22px] text-[#898c94] w-[350px] truncate flex">{ Yuuka_Chats[Yuuka_Chats.length-1] !== "&" ? Yuuka_Chats[Yuuka_Chats.length-1] : "유우카의 인연 스토리로" }</div>
                   </div>
                 </button>
 
@@ -208,6 +226,10 @@ function Main() {
                     return ( <div className='flex justify-end'>
                       <div className='one-chat p-2 m-2 max-w-[450px] bg-[#498bc7] rounded-xl text-white text-xl'>{ i.substring(1) }</div>
                     </div> )
+                  } else if (i.split('')[0] == "&") {
+                    return ( <button className='flex justify-end' onClick={ onYuukaStory }>
+                      <img className='w-[400px] mr-4 cursor-pointer transition duration-100 active:scale-90' src={ yuuka_story_btn } />
+                    </button> )
                   } else {
                     return( <div className='flex justify-start'>
                       <div className='one-chat p-2 m-2 max-w-[365px] bg-[#4c586d] rounded-xl text-white text-xl'>{ i }</div>
@@ -223,19 +245,19 @@ function Main() {
       : null }
 
       {/* Memorial Musics */}
-      { isMusic == true && memorial == "Yuuka" ?
+      { isMusic == true && memorial == "Yuuka" && isYuukaStory == false ?
         <audio loop autoPlay>
           <source src={ MidSummerCat } type="audio/mp3" />
         </audio>
        : null }
 
-      { isMusic == true && memorial == "Azusa" ?
+      { isMusic == true && memorial == "Azusa" && isYuukaStory == false ?
         <audio loop autoPlay>
           <source src={ LuminousMemory } type="audio/mp3" />
         </audio>
        : null }
 
-      { isMusic == true && memorial == "Hoshino" ?
+      { isMusic == true && memorial == "Hoshino" && isYuukaStory == false ?
         <audio loop autoPlay>
           <source src={ Theme120 } type="audio/mp3" />
         </audio>
@@ -354,7 +376,7 @@ function Main() {
         </div>
       </div>
 
-      <img className='w-screen h-screen fixed -z-20' src={ Sub_bg } alt="" />
+      <img className='w-screen h-screen absolute -mt-[400px] -z-20' src={ Sub_bg } alt="" />
 
     </div>
   )
