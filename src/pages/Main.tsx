@@ -110,6 +110,7 @@ function Main() {
     setMemorial(Characters[rand])
 
     if (localStorage.getItem("YuukaStoryProgress") == null) localStorage.setItem("YuukaStoryProgress", "0")
+    console.log(localStorage.getItem("YuukaStoryProgress"))
   }, [])
   
   return (
