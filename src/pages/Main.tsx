@@ -43,14 +43,14 @@ function Main() {
   const [memorial, setMemorial] = useState("")
   const [isMusic, setIsMusic] = useState(false)
   const [isSelectingMemorial, setIsSelectingMemorial] = useState(false)
-  const [isMomoTalk, setIsMomoTalk] = useState(false)
-  const [whoChat, setWhoChat] = useState("")
   const [expProgress, setExpProgress] = useState(0)
   const [maxExp, setMaxExp] = useState(0)
+  const [isMomoTalk, setIsMomoTalk] = useState(false)
+  const [whoChat, setWhoChat] = useState("")
   
   const Characters = ["Yuuka", "Azusa", "Hoshino"]
 
-  const Yuuka_Chats = ["안녕하세요, 선생님. 유우카입니다.", "저 기억하고 계시죠?", "*아아. 당연하지.", "뭐, 그럼 다행이구요.", "선생님의 연락처를 받아두길 잘했네요.", "모모톡으로 연락드린 건 다름이 아니라······.", "지난번 샬레 탈환 당시 사용했던 탄환의 경비 처리가 늦어지고 있어서요."]
+  const Yuuka_Chats = ["안녕하세요, 선생님. 유우카입니다.", "저 기억하고 계시죠?", "*아아. 당연하지.", "뭐, 그럼 다행이구요.", "선생님의 연락처를 받아두길 잘했네요.", "모모톡으로 연락드린 건 다름이 아니라······.", "지난번 샬레 탈환 당시 사용했던 탄환의 경비 처리가 늦어지고 있어서요.", "경비는 언제쯤 청구받을 수 있을까요?", "*이쪽에서 처리해야 하는 거였어······?", "물론이죠. 탄환도 공짜는 아니니까요.", "청구서를 작성해서 보내주시면 총학생회에서", "대신 잔금을 치러줄 거에요.", "청구서 양식이라면 밀레니엄 학원에서 쓰는 것이 있어요.", "다음에 샬레를 방문할 때 가져다드릴게요.", "*도와줘서 고마워.", "어려운 일도 아닌걸요.", "그럼 좋은 하루 되세요."]
 
   const StyledProgressBar = styled.div` width: ${ Math.floor(expProgress / maxExp * 100) }%; height: 5px; background-color: #59eefb`
 
@@ -77,6 +77,7 @@ function Main() {
 
   const onClickQuitMomo = () => {
     setIsMomoTalk(false)
+    setWhoChat("")
   }
 
   const onClickMomo = () => {
@@ -97,16 +98,8 @@ function Main() {
     // let rand = Math.floor(Math.random() * 2)
     let rand = 2
 
-    setMemorial(Characters[rand])
+    setMemorial(Characters[rand])    
   }, [])
-
-  // useEffect(() => {
-  //   if (sessionStorage.getItem("isSelectingMemorial") == "true") {
-  //     setIsMusic(true)
-  //   } else {
-  //     setIsMusic(false)
-  //   }
-  // })
   
   return (
     <div className="main bg-cover font-molu-bold overflow-x-hidden">
@@ -177,9 +170,9 @@ function Main() {
               </div>
             </div>
 
-            <div className="chat-list w-[500px] h-[550px] bg-[#f3f7f8]">
-              <div className="top-bar w-[500px] h-[70px] flex items-center justify-around ml-1">
-                <div className="text text-2xl font-molu-bold text-[#373a3d]">안 읽은 메시지(0)</div>
+            <div className="chat-list w-[500px] h-[550px] bg-[#f3f7f8] border-r-[1px] border-zinc-200">
+              <div className="top-bar w-[500px] h-[70px] flex items-center justify-around ml-2">
+                <div className="text text-2xl font-molu-bold text-[#373a3d] pt-1">안 읽은 메시지(0)</div>
                 <img className='h-[70px] mt-5 transition duration-100 active:scale-90 cursor-pointer' src={ momo_latest_btn } />
                 <img className='h-[70px] -ml-10 mt-5 transition duration-100 active:scale-90 cursor-pointer' src={ momo_down_btn } />
               </div>
@@ -187,35 +180,41 @@ function Main() {
                 <div className="line w-[460px] h-[1.5px] bg-zinc-300"></div>
               </div>
               <div className="chats mt-2">
-                <div className="chat-one w-[500px] h-[85px] hover:bg-[#dce5ec] flex justify-start items-center">
+
+                <button className="chat-one w-[500px] h-[85px] hover:bg-[#dce5ec] flex justify-start items-center" onClick={ () => { SelectChat("Yuuka") } }>
                   <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
-                  <div className="name-last ml-4 mt-[2px]">
+                  <div className="name-last ml-4 mt-[2px] flex flex-col items-start">
                     <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
-                    <div className="last font-molu-bold text-[22px] text-[#898c94] w-[350px] truncate">{ Yuuka_Chats[Yuuka_Chats.length-1] }</div>
+                    <div className="last font-molu-bold text-[22px] text-[#898c94] w-[350px] truncate flex">{ Yuuka_Chats[Yuuka_Chats.length-1] }</div>
                   </div>
-                </div>
+                </button>
+
               </div>
             </div>
             <div className="chat-real w-[490px] h-[534px] rounded-br-xl bg-white pt-4 overflow-y-auto overflow-x-hidden">
 
-              <div className="w-[500px] h-[85px] hover:bg-[#dce5ec] flex justify-start items-center">
-                <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
-                <div className="name-last ml-4 mt-[2px]">
-                  <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
+              { whoChat == "Yuuka" ?
+                <div className="w-[500px] h-[85px] flex justify-start items-center">
+                  <img className='rounded-full w-[68px] h-[68px] ml-4' src={ yuuka_profile } />
+                  <div className="name-last ml-4 mt-[2px]">
+                    <div className="name font-molu-bold text-2xl text-[#373a3d]">유우카</div>
+                  </div>
                 </div>
-              </div>
+               : null }
 
-              { Yuuka_Chats.map((i) => {
-                if (i.split('')[0] == "*") {
-                  return ( <div className='flex justify-end'>
-                    <div className='one-chat p-2 m-2 max-w-[450px] bg-[#498bc7] rounded-xl text-white text-xl'>{ i.substring(1) }</div>
-                  </div> )
-                } else {
-                  return( <div className='flex justify-start'>
-                  <div className='one-chat p-2 m-2 max-w-[450px] bg-[#4c586d] rounded-xl text-white text-xl'>{ i }</div>
-                  </div> )
-                }
-              }) }
+              { whoChat == "Yuuka" ?
+                ( Yuuka_Chats.map((i) => {
+                  if (i.split('')[0] == "*") {
+                    return ( <div className='flex justify-end'>
+                      <div className='one-chat p-2 m-2 max-w-[450px] bg-[#498bc7] rounded-xl text-white text-xl'>{ i.substring(1) }</div>
+                    </div> )
+                  } else {
+                    return( <div className='flex justify-start'>
+                      <div className='one-chat p-2 m-2 max-w-[365px] bg-[#4c586d] rounded-xl text-white text-xl'>{ i }</div>
+                    </div> )
+                  }
+                }) )
+                 : null }
             </div>
 
           </div>
